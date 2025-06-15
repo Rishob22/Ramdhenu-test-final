@@ -21,7 +21,7 @@ const Home = ({products,bannerData}) => {
   </p>
  </div>
    <Categories />
-   <AboutUs />
+   <AboutUs id="aboutus" />
    <FollowUsOn />
  </>
   )

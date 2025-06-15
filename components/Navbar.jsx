@@ -64,21 +64,17 @@ const Navbar = () => {
             <Link href="/" passHref>
               <a style={{ textDecoration: "none", color: "#3A1212" }}>Home</a>
             </Link>
-            <Link href="/book-services" passHref>
-              <a style={{ textDecoration: "none", color: "#3A1212" }}>
-                Book Services
-              </a>
-            </Link>
+
             <Link href="#contactus" passHref>
               <a style={{ textDecoration: "none", color: "#3A1212" }}>
                 Contact Us
               </a>
             </Link>
-            <Link href="#aboutus" passHref>
+            <a href="#aboutus">
               <a style={{ textDecoration: "none", color: "#3A1212" }}>
                 About Us
               </a>
-            </Link>
+            </a>
             <button
               className="cart-icon"
               onClick={() => setShowCart(true)}
