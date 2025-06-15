@@ -39,7 +39,7 @@ const Navbar = () => {
           <a style={{ display: "flex", alignItems: "center" }}>
             <div style={{ height: "80px", width: "80px" }}>
               <Image
-                src="/asset/Logo.png"
+                src="/asset/Logo.jpg"
                 alt="Logo"
                 layout="responsive"
                 width={60}
