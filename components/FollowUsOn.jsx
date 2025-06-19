@@ -2,61 +2,64 @@ import React from "react";
 import Head from "next/head";
 
 const FollowUsOn = () => {
-  // Inline styles
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    background: "linear-gradient(to bottom, #d3d3d3, #ffffff)",
-    padding: "20px",
-    borderRadius: "10px",
+    background: "linear-gradient(to bottom, #eaeaea, #ffffff)",
+    padding: "30px",
+    borderRadius: "12px",
     textAlign: "center",
-    maxWidth: "400px",
-    margin: "auto",
+    maxWidth: "420px",
+    margin: "40px auto",
   };
 
   const titleStyle = {
-    fontSize: "1.5rem",
-    color: "#333",
-    marginBottom: "20px",
+    fontSize: "2rem",
+    color: "#222",
+    marginBottom: "25px",
+    fontWeight: "600",
   };
 
   const buttonsContainerStyle = {
     display: "flex",
-    gap: "20px",
+    gap: "25px",
   };
 
-  const buttonStyle = {
+  const baseButtonStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "70px",
-    height: "70px",
-    backgroundColor: "#f0f0f0",
+    width: "80px",
+    height: "80px",
     borderRadius: "50%",
     textDecoration: "none",
-    fontSize: "2rem",
-    color: "#666",
-    transition: "transform 0.3s ease, boxShadow 0.3s ease",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-  };
-
-  const hoverEffect = {
-    transform: "scale(1.1)",
-    boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)",
+    fontSize: "2.2rem",
+    color: "#fff",
+    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
   };
 
   const instagramStyle = {
-    ...buttonStyle,
-    backgroundColor: "#e4405f",
-    color: "#fff",
+    ...baseButtonStyle,
+    background:
+      "radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
   };
 
   const facebookStyle = {
-    ...buttonStyle,
-    backgroundColor: "#4267b2",
-    color: "#fff",
+    ...baseButtonStyle,
+    backgroundColor: "#1877f2",
+  };
+
+  const handleMouseEnter = (e) => {
+    e.target.style.transform = "scale(1.15)";
+    e.target.style.boxShadow = "0 10px 16px rgba(0, 0, 0, 0.25)";
+  };
+
+  const handleMouseLeave = (e) => {
+    e.target.style.transform = "scale(1)";
+    e.target.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.15)";
   };
 
   return (
@@ -71,28 +74,24 @@ const FollowUsOn = () => {
         <h2 style={titleStyle}>Follow Us On</h2>
         <div style={buttonsContainerStyle}>
           <a
-            href="https://www.instagram.com"
+            href="https://www.instagram.com/ramdhenumekhlachadarcollectios?igsh=MTJiZzQ3bGVyb3FjbA=="
             target="_blank"
             rel="noopener noreferrer"
             style={instagramStyle}
-            onMouseEnter={(e) =>
-              (e.target.style.transform = hoverEffect.transform)
-            }
-            onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <i className="fab fa-instagram"></i>
           </a>
           <a
-            href="https://www.facebook.com"
+            href="https://www.facebook.com/ramdhenumekhlachadarcollections"
             target="_blank"
             rel="noopener noreferrer"
             style={facebookStyle}
-            onMouseEnter={(e) =>
-              (e.target.style.transform = hoverEffect.transform)
-            }
-            onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
-            <i className="fab fa-facebook"></i>
+            <i className="fab fa-facebook-f"></i>
           </a>
         </div>
       </div>

@@ -6,15 +6,11 @@ import { useRouter } from 'next/router';
 const DisplayCategory = ({products}) => {
   const router = useRouter();
   const { category } = router.query;
-  let unique_products=[];
-  for(let i=0;i<products.length;i++){
-    unique_products.push(products[i]);
- }
   return (<>
   <center><h2>{category}</h2></center>
   <div className="products-container">
  {
-  unique_products?.map((product)=>category.toLowerCase()===product.category && <Product product={product} key={product._id} />)
+ products?.map((product)=>category==product.category && <Product product={product} key={product._id} />)
  }
  </div>
   </>

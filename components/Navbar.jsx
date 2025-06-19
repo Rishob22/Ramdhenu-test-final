@@ -70,11 +70,11 @@ const Navbar = () => {
                 Contact Us
               </a>
             </Link>
-            <a href="#aboutus">
+            <Link href="/#aboutus">
               <a style={{ textDecoration: "none", color: "#3A1212" }}>
                 About Us
               </a>
-            </a>
+            </Link>
             <button
               className="cart-icon"
               onClick={() => setShowCart(true)}

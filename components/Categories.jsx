@@ -1,9 +1,22 @@
 import React from "react";
 import Link from "next/link";
 const Categories = () => {
-  const arr = ["Jewellery", "Silk", "Cotton", "Banarasi", "Dhakai", "Muslin"];
+  const arr = [
+    "Pure Paat",
+    "Pure Toss",
+    "Handmade Mixed Paat",
+    "Pure Cotton",
+    "Cotton Silk",
+    "Demaji Padmini",
+    "Nooni Cotton",
+    "Kesapaat Cotton",
+    "Assam Silk Saree",
+    "Assam Silk Replica Saree",
+    "Cotton Assameese Saree",
+    "Others",
+  ];
   return (
-    <div className="products-container">
+    <div className="products-container" id="shopnow">
       {arr.map((category) => (
         <div>
           <Link href={`/display/${category}`}>
