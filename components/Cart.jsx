@@ -9,7 +9,7 @@ import {
 import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
 import { useStateContext } from "@/context/StateContext";
-import { urlFor } from "../sanity-backend/lib/client";
+import { urlFor } from "../utils/urlGenerator.js";
 const Cart = () => {
   const cartRef = useRef();
   const {

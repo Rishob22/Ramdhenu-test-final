@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { urlFor } from "../sanity-backend/lib/client";
+import { urlFor } from "../utils/urlGenerator.js";
 const Product = ({ product: { image, name, slug, price } }) => {
   return (
     <div>

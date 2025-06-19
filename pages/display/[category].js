@@ -1,6 +1,6 @@
 import React from 'react'
 //like the component in [slug].js,the component in [category].js will also be rendered as a page,it will not be called within any element or file
-import { client } from '../../sanity-backend/lib/client';
+import { client } from '../../utils/urlGenerator.js';
 import { Product } from '@/components';
 import { useRouter } from 'next/router';
 const DisplayCategory = ({products}) => {

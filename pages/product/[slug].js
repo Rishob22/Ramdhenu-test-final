@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 //[] around 'slug' makes it dynamic and thats why it has to be accessed in Products.js Link as 'href={`/products/${slug.current}`}'
 //unlike in React.js, Next.js does file based routing 
 import { Product } from '@/components';
-import { client,urlFor } from '../../sanity-backend/lib/client';
+import { client,urlFor } from '../../utils/urlGenerator.js';
 import {AiOutlineMinus,AiOutlinePlus,AiFillStar,AiOutlineStar} from 'react-icons/ai';
 import {useStateContext} from '../../context/StateContext';
 //can use the context within stateContext

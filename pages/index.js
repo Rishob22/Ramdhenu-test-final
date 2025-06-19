@@ -1,6 +1,6 @@
 import React from 'react';
 import {Product,HeroBanner,Footer} from '../components/index.js';
-import {client} from '../sanity-backend/lib/client.js';//importing client info
+import {client} from '../utils/urlGenerator.js';//importing client info
 //In next.js,unlike react.js,we use something called getServerSideProps for server side rendering.next.js will pre render this page on each request using the data returned by getServerSideProps
 import Categories from '@/components/Categories.jsx';
 import FollowUsOn from '@/components/FollowUsOn.jsx';
