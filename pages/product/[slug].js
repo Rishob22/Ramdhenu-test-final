@@ -8,17 +8,46 @@ import {useStateContext} from '../../context/StateContext';
 //can use the context within stateContext
 //the ProductDetails come directly as a page,it is not imported as a component in any other file
 import {ScrollMenu,VisibilityContext} from 'react-horizontal-scrolling-menu';
+import {toast} from 'react-hot-toast';
 const ProductDetails = ({ product, products }) => {
+  
   // Check if the product data exists
   if (!product) {
     return <div>Product not found</div>;
   }
   
-  
   const { image, name, details, price,category } = product;
   const [index,setIndex]=useState(0);
-  const {decQty,incQty,qty,onAdd}=useStateContext();
+  const [local_qty,setLocal_qty]=useState(0);
+  const {onAdd}=useStateContext();
+ const handleWhatsAppRedirect = () => {
+    const phoneNumber = 919804462235;
+    const total=local_qty*product.price;
+    const message = `Hello! I am interested in purchasing:
+ ${local_qty==0?1:local_qty} piece${local_qty>1?'s':''} of ${product.name} for Rs.${local_qty==0?product.price : total}
+    `;
+    const encodedMessage = encodeURIComponent(message);
+    const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
+    // Detect if it's mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // Opens in WhatsApp mobile app
+      window.location.href = url;
+    } else {
+      // For desktops, attempt to open WhatsApp Desktop or Web
+      const desktopUrl = `whatsapp://send?phone=${phoneNumber}&text=${encodedMessage}`;
+      window.location.href = desktopUrl;
+
+      // Fallback if desktop URL fails
+      if (!isMobile) {
+        setTimeout(() => {
+          window.open(url, "_blank"); // Redirect to web version
+        }, 4000);
+      }
+    }
+  };
   return (
     <div>
       <div className="product-detail-container">
@@ -51,22 +80,26 @@ const ProductDetails = ({ product, products }) => {
 
           <h3>Quantity:</h3>
           <p className="quantity-desc">
-            <span className="minus" onClick={decQty}>
+            <span className="minus" onClick={()=>{if(local_qty>0) setLocal_qty(prev=>prev-1);}} >
             <AiOutlineMinus />
             </span>
             <span className="num" onClick="">
-            {qty}
+            {local_qty}
             </span>
-            <span className="plus" onClick={incQty}>
+            <span className="plus" onClick={()=>{setLocal_qty(prev=>prev+1);}}>
             <AiOutlinePlus />
             </span>
           </p>
          </div>
          <div className="buttons">
           <button type="button" className="add-to-cart" onClick={()=>{
-            console.log(category);
-            onAdd(product,qty);}}>Add to Cart</button>
-          <button type="button" className="buy-now" onClick="">Buy Now</button>
+            if(local_qty==0)  
+             {onAdd(product,1);}
+         else
+          {onAdd(product,local_qty); setLocal_qty(0);}}}>Add to Cart</button>
+          <button type="button" className="buy-now"  onClick={() => {
+   handleWhatsAppRedirect();
+  }}>Buy Now</button>
          </div>
         </div>
       </div>

@@ -15,13 +15,16 @@ const onAdd=(product,quantity)=>{
    setTotalPrice((prevTotalPrice)=>prevTotalPrice+product.price * quantity);
    setTotalQuantities(prevTotalQuantities=>prevTotalQuantities+quantity); 
    if(checkProductInCart){
-    let updatedCartItems=cartItems.map((cartProduct)=>{
-      if(cartProduct._id==product._id) 
-        return {
-      ...cartProduct,
-      quantity: cartProduct.quantity+quantity
+    let updatedCartItems = cartItems.map((cartProduct) => {
+    if (cartProduct._id === product._id) {
+      return {
+        ...cartProduct,
+        quantity: cartProduct.quantity + quantity
+      };
+    } else {
+      return cartProduct; // Return other items unchanged
     }
-    });
+  });
     setCartItems(updatedCartItems);
 
    }//end of if block
@@ -30,7 +33,7 @@ const onAdd=(product,quantity)=>{
     setCartItems([...cartItems,{...product}]);
     //In the array,we spread the existing cart items and then we have the object where we spread the new product
    }//end of else block
-   toast.success(`${qty} ${product.name} added to the cart.`);
+   toast.success(`${quantity} ${product.name} added to the cart.`);
    setQty(1);
 }
 const onRemove=(id,removed_price,removed_quantity)=>{
