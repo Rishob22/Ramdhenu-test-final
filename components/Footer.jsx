@@ -1,13 +1,19 @@
 import React from "react";
-import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
+
 const Footer = () => {
   return (
-    <div className="footer-container">
-      <p>2025 Ramdhenu Sarees All rights reserved</p>
-      <p className="icons">
-        <AiFillInstagram />
-        <AiOutlineTwitter />
-      </p>
+    <div
+      style={{
+        padding: "28px 20px",
+        marginTop: "60px",
+        background: "#fafafa",
+        borderTop: "1px solid #eee",
+        textAlign: "center",
+        fontSize: "0.95rem",
+        color: "#555",
+      }}
+    >
+      <p style={{ margin: 0 }}>© 2025 Ramdhenu Sarees. All rights reserved.</p>
     </div>
   );
 };

@@ -11,219 +11,189 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Check screen size on load and resize
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    handleResize(); // Initial check
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const navLinkStyle = {
+    textDecoration: "none",
+    color: "#3A1212",
+    fontSize: "17px",
+    fontWeight: "600",
+    letterSpacing: "0.5px",
+  };
+
   return (
     <>
-      {/* Navbar Container */}
+      {/* NAVBAR */}
       <div
         style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "15px 30px",
-          borderBottom: "1px solid #ddd",
+          padding: "14px 28px",
           backgroundColor: "#fff",
+          borderBottom: "1px solid #eee",
+          boxShadow: "0 4px 14px rgba(0,0,0,0.04)",
         }}
       >
-        {/* Logo */}
-        <Link href="/" passHref>
-          <a style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ height: "80px", width: "80px" }}>
-              <Image
-                src="/asset/Logo.jpg"
-                alt="Logo"
-                layout="responsive"
-                width={60}
-                height={60}
-                priority
-              />
-            </div>
-          </a>
+        {/* LOGO */}
+        <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ width: "70px" }}>
+            <Image
+              src="/asset/Logo.jpg"
+              alt="Ramdhenu Sarees"
+              width={70}
+              height={70}
+              priority
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* DESKTOP MENU */}
         {!isMobile && (
           <div
             style={{
               display: "flex",
-              gap: "30px",
-              fontSize: "18px", // Larger font size
+              alignItems: "center",
+              gap: "32px",
               fontFamily: "'Playfair Display', serif",
-              fontWeight: "bold",
             }}
           >
-            <Link href="/" passHref>
-              <a style={{ textDecoration: "none", color: "#3A1212" }}>Home</a>
+            <Link href="/" style={navLinkStyle}>
+              Home
+            </Link>
+            <Link href="/#aboutus" style={navLinkStyle}>
+              About Us
+            </Link>
+            <Link href="/#contactus" style={navLinkStyle}>
+              Contact
             </Link>
 
-            <Link href="#contactus" passHref>
-              <a style={{ textDecoration: "none", color: "#3A1212" }}>
-                Contact Us
-              </a>
-            </Link>
-            <Link href="/#aboutus">
-              <a style={{ textDecoration: "none", color: "#3A1212" }}>
-                About Us
-              </a>
-            </Link>
+            {/* CART */}
             <button
-              className="cart-icon"
               onClick={() => setShowCart(true)}
               style={{
                 background: "none",
                 border: "none",
                 cursor: "pointer",
                 position: "relative",
-                fontSize: "24px",
+                fontSize: "26px",
+                color: "#111",
               }}
             >
               <AiOutlineShopping />
-              <span
-                className="cart-item-qty"
-                style={{
-                  position: "absolute",
-                  top: "-5px",
-                  right: "-5px",
-                  backgroundColor: "#FF2625",
-                  color: "#fff",
-                  borderRadius: "50%",
-                  padding: "0 5px",
-                  fontSize: "12px",
-                }}
-              >
-                {totalQuantities}
-              </span>
+              {totalQuantities > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-6px",
+                    right: "-8px",
+                    background: "#FF2625",
+                    color: "#fff",
+                    borderRadius: "50%",
+                    fontSize: "11px",
+                    padding: "2px 6px",
+                    fontWeight: "600",
+                  }}
+                >
+                  {totalQuantities}
+                </span>
+              )}
             </button>
           </div>
         )}
 
-        {/* Mobile View: Cart and Hamburger Menu */}
+        {/* MOBILE RIGHT SIDE */}
         {isMobile && (
-          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            {/* Hamburger Menu Icon */}
-            <div
+          <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
+            {/* CART */}
+            <button
+              onClick={() => setShowCart(true)}
               style={{
-                fontSize: "28px", // Larger hamburger icon
+                background: "none",
+                border: "none",
                 cursor: "pointer",
+                position: "relative",
+                fontSize: "26px",
               }}
+            >
+              <AiOutlineShopping />
+              {totalQuantities > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-6px",
+                    right: "-8px",
+                    background: "#FF2625",
+                    color: "#fff",
+                    borderRadius: "50%",
+                    fontSize: "11px",
+                    padding: "2px 6px",
+                    fontWeight: "600",
+                  }}
+                >
+                  {totalQuantities}
+                </span>
+              )}
+            </button>
+
+            {/* HAMBURGER */}
+            <div
+              style={{ fontSize: "28px", cursor: "pointer" }}
               onClick={() => setMenuOpen(!menuOpen)}
             >
               {menuOpen ? <FiX /> : <FiMenu />}
             </div>
-
-            {/* Cart Icon */}
-            <button
-              className="cart-icon"
-              onClick={() => setShowCart(true)}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                position: "relative",
-                fontSize: "24px",
-              }}
-            >
-              <AiOutlineShopping />
-              <span
-                className="cart-item-qty"
-                style={{
-                  position: "absolute",
-                  top: "-5px",
-                  right: "-5px",
-                  backgroundColor: "#FF2625",
-                  color: "#fff",
-                  borderRadius: "50%",
-                  padding: "0 5px",
-                  fontSize: "12px",
-                }}
-              >
-                {totalQuantities}
-              </span>
-            </button>
           </div>
         )}
       </div>
 
-      {/* Mobile Navigation Links */}
+      {/* MOBILE DROPDOWN */}
       {menuOpen && isMobile && (
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
             position: "absolute",
-            top: "60px",
-            left: "0",
-            backgroundColor: "#fff",
             width: "100%",
-            zIndex: 10,
-            borderTop: "1px solid #ddd",
+            background: "#fff",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+            borderTop: "1px solid #eee",
+            zIndex: 40,
           }}
         >
-          <Link href="/" passHref>
-            <a
+          {[
+            { name: "Home", link: "/" },
+            { name: "About Us", link: "/#aboutus" },
+            { name: "Contact", link: "/#contactus" },
+          ].map((item) => (
+            <Link
+              key={item.name}
+              href={item.link}
+              onClick={() => setMenuOpen(false)}
               style={{
-                padding: "15px 30px",
-                textDecoration: "none",
+                display: "block",
+                padding: "18px 28px",
+                fontSize: "17px",
                 color: "#3A1212",
-                borderBottom: "1px solid #ddd",
-                fontSize: "18px", // Larger font size for mobile
+                textDecoration: "none",
+                borderBottom: "1px solid #f1f1f1",
+                fontWeight: "600",
               }}
             >
-              Home
-            </a>
-          </Link>
-          <Link href="/book-services" passHref>
-            <a
-              style={{
-                padding: "15px 30px",
-                textDecoration: "none",
-                color: "#3A1212",
-                borderBottom: "1px solid #ddd",
-                fontSize: "18px", // Larger font size for mobile
-              }}
-            >
-              Book Services
-            </a>
-          </Link>
-          <Link href="#contactus" passHref>
-            <a
-              style={{
-                padding: "15px 30px",
-                textDecoration: "none",
-                color: "#3A1212",
-                borderBottom: "1px solid #ddd",
-                fontSize: "18px", // Larger font size for mobile
-              }}
-            >
-              Contact Us
-            </a>
-          </Link>
-          <Link href="#aboutus" passHref>
-            <a
-              style={{
-                padding: "15px 30px",
-                textDecoration: "none",
-                color: "#3A1212",
-                borderBottom: "1px solid #ddd",
-                fontSize: "18px", // Larger font size for mobile
-              }}
-            >
-              About Us
-            </a>
-          </Link>
+              {item.name}
+            </Link>
+          ))}
         </div>
       )}
 
-      {/* Cart Modal */}
+      {/* CART */}
       {showCart && <Cart />}
     </>
   );

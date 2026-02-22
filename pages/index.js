@@ -1,146 +1,174 @@
-import React from 'react';
-import {Product,HeroBanner,Footer} from '../components/index.js';
-import {client} from '../utils/urlGenerator.js';//importing client info
-//In next.js,unlike react.js,we use something called getServerSideProps for server side rendering.next.js will pre render this page on each request using the data returned by getServerSideProps
-import Categories from '@/components/Categories.jsx';
-import FollowUsOn from '@/components/FollowUsOn.jsx';
-import AboutUs from '@/components/AboutUs.jsx';
-const Home = ({products,bannerData}) => {
-  let unique_products=[];
-  for(let i=0;i<products.length;i=i+2){
-    unique_products.push(products[i]);
- }
+import React from "react";
+import { Product, HeroBanner, Footer } from "../components/index.js";
+import { client } from "../utils/urlGenerator.js";
+import Categories from "@/components/Categories.jsx";
+import FollowUsOn from "@/components/FollowUsOn.jsx";
+import AboutUs from "@/components/AboutUs.jsx";
+
+const Home = ({ products = [], bannerData = [] }) => {
+  const hero = bannerData?.length ? bannerData[0] : null;
+
   return (
- <>
- <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
- {/* If first statement is true,then pass the second one as a prob*/}
- <div className="products-heading">
-  <h2>Categories</h2>
-  <p>
-    Explore the variety of our collections
-  </p>
- </div>
-   <Categories />
-   <div className="products-heading" id="aboutus">
-      <h2
-        style={{ textAlign: "center", fontSize: "2rem", marginBottom: "20px" }}
-      >
-        About Us
-      </h2>
-      <div
-        className="about-us-container"
+    <>
+      {/* HERO */}
+      {hero && <HeroBanner heroBanner={hero} />}
+
+      {/* CATEGORIES HEADING */}
+      <section
         style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "center",
-          gap: "20px",
+          textAlign: "center",
+          marginTop: "50px",
+          marginBottom: "30px",
+          padding: "0 20px",
+        }}
+      ></section>
+
+      <Categories />
+
+      {/* ABOUT US */}
+      <section
+        id="aboutus"
+        style={{
+          marginTop: "70px",
+          padding: "0 20px",
+          maxWidth: "1100px",
+          marginInline: "auto",
         }}
       >
-        <img
-          src="/asset/aboutus/abtUs.jpg"
-          className="about-us"
-          alt="About Us"
-          style={{ width: "300px", height: "auto", borderRadius: "8px" }}
-        />
-        <div
-          className="about-us-content"
-          style={{ maxWidth: "500px", textAlign: "left" }}
-        >
-          <p
-            className="about-us-text"
-            style={{ fontSize: "1rem", lineHeight: "1.5", color: "#333" }}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam.
-          </p>
-          <button
-            className="learn-more-btn"
+        <AboutUs />
+      </section>
+
+      {/* CONTACT US */}
+      <section
+        id="contactus"
+        style={{
+          marginTop: "110px",
+          padding: "0 20px",
+        }}
+      >
+        {/* TITLE */}
+        <div style={{ textAlign: "center", marginBottom: "50px" }}>
+          <h2
             style={{
-              padding: "10px 20px",
-              backgroundColor: "#007BFF",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontSize: "1rem",
+              fontSize: "2.4rem",
+              marginBottom: "10px",
+              fontWeight: "600",
+              letterSpacing: "0.4px",
             }}
           >
-            Learn More
-          </button>
+            Contact Us
+          </h2>
+
+          <p
+            style={{
+              color: "#666",
+              fontSize: "1.05rem",
+              maxWidth: "520px",
+              margin: "0 auto",
+              lineHeight: "1.6",
+            }}
+          >
+            Have questions about our collections or need help placing an order?
+            We’re happy to assist you.
+          </p>
         </div>
-      </div>
-    </div>
-    <div className="products-heading" id="contactus">
-  <h2
-    className="contact-us-title"
-    style={{ textAlign: "center", fontSize: "2rem", marginBottom: "20px" }}
-  >
-    Contact Us
-  </h2>
 
-  <div
-    className="contact-us-container"
-    style={{
-      maxWidth: "600px",
-      margin: "0 auto",
-      padding: "20px",
-      backgroundColor: "#f9f9f9",
-      borderRadius: "8px",
-      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
-      textAlign: "left",
-    }}
-  >
-    <p style={{ marginBottom: "10px", fontSize: "1rem", color: "#333" }}>
-      <strong>Owner:</strong> Owner's name
-    </p>
-    <p style={{ marginBottom: "10px", fontSize: "1rem", color: "#333" }}>
-      <strong>Email:</strong> ajoy.dey306@gmail.com
-    </p>
-    <p style={{ marginBottom: "20px", fontSize: "1rem", color: "#333" }}>
-      <strong>Phone:</strong> +91 XXXXXXXXXX
-    </p>
+        {/* CARD */}
+        <div
+          style={{
+            maxWidth: "720px",
+            margin: "0 auto",
+            padding: "40px",
+            background: "#fff",
+            borderRadius: "16px",
+            boxShadow: "0 18px 45px rgba(0,0,0,0.05)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "22px",
+          }}
+        >
+          {/* INFO BLOCK */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+              fontSize: "1.05rem",
+            }}
+          >
+            <div style={{ display: "flex", gap: "10px" }}>
+              <strong style={{ minWidth: "80px", color: "#111" }}>
+                Owner:
+              </strong>
+              <span style={{ color: "#555" }}>Ajoy Dey</span>
+            </div>
 
-    <a
-      href="https://wa.me/919804462235"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        display: "inline-block",
-        padding: "10px 24px",
-        backgroundColor: "#25D366",
-        color: "#fff",
-        borderRadius: "4px",
-        fontSize: "1rem",
-        fontWeight: "500",
-        textDecoration: "none",
-        transition: "background-color 0.3s ease",
-      }}
-      onMouseOver={(e) => (e.target.style.backgroundColor = "#1DA851")}
-      onMouseOut={(e) => (e.target.style.backgroundColor = "#25D366")}
-    >
-      Chat on WhatsApp
-    </a>
-  </div>
-</div>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <strong style={{ minWidth: "80px", color: "#111" }}>
+                Email:
+              </strong>
+              <span style={{ color: "#555" }}>ajoy.dey306@gmail.com</span>
+            </div>
 
-   <FollowUsOn />
- </>
-  )
-}
-//whatever the following function returns is gonna get populated into our Home function via props
-export const getServerSideProps=async()=>{
-  const query='*[_type=="product"]';//lets grab all the products from our sanity dashboard
-  const products=await client.fetch(query);//client is that one object that we had already defined earlier  
-  
-  const bannerQuery='*[_type=="banner"]';//lets grab all the products from our sanity dashboard
-  const bannerData=await client.fetch(bannerQuery);
+            <div style={{ display: "flex", gap: "10px" }}>
+              <strong style={{ minWidth: "80px", color: "#111" }}>
+                Phone:
+              </strong>
+              <span style={{ color: "#555" }}>+91 8876385120</span>
+            </div>
+          </div>
+
+          {/* CTA AREA */}
+          <div style={{ marginTop: "15px" }}>
+            <a
+              href="https://wa.me/918876385120"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-block",
+                padding: "14px 32px",
+                background: "linear-gradient(135deg,#25D366,#1DA851)",
+                color: "#fff",
+                borderRadius: "8px",
+                fontSize: "1rem",
+                fontWeight: "600",
+                textDecoration: "none",
+                boxShadow: "0 10px 22px rgba(37,211,102,0.25)",
+                transition: "all 0.25s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = "translateY(-2px)";
+                e.target.style.boxShadow = "0 14px 28px rgba(37,211,102,0.35)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = "translateY(0)";
+                e.target.style.boxShadow = "0 10px 22px rgba(37,211,102,0.25)";
+              }}
+            >
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <FollowUsOn />
+    </>
+  );
+};
+
+export const getServerSideProps = async () => {
+  const query = '*[_type=="product"]';
+  const products = await client.fetch(query);
+
+  const bannerQuery = '*[_type=="banner"]';
+  const bannerData = await client.fetch(bannerQuery);
+
   return {
-    props:{
-      products,
-      bannerData,
-    }
-  }
-}
+    props: {
+      products: products || [],
+      bannerData: bannerData || [],
+    },
+  };
+};
+
 export default Home;
