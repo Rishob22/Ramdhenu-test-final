@@ -89,7 +89,7 @@ const Categories = () => {
                 style={{
                   width: "100%",
                   height: "260px",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   display: "block",
                 }}
               />
